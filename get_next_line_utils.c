@@ -6,7 +6,7 @@
 /*   By: kochniak <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 23:50:52 by kochniak          #+#    #+#             */
-/*   Updated: 2025/10/31 14:45:15 by kochniak         ###   ########.fr       */
+/*   Updated: 2025/11/22 11:04:34 by kochniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ char	*ft_strjoin(char *s1, char *s2)
 {
 	size_t	l1;
 	size_t	l2;
-	size_t	i;
 	char	*tmp;
 
 	if (!s2)
@@ -65,19 +64,15 @@ char	*ft_strjoin(char *s1, char *s2)
 		return (ft_strdup(s2));
 	l1 = ft_strlen(s1);
 	l2 = ft_strlen(s2);
-	tmp = realloc(s1, l1 + l2 + 1);
+	tmp = malloc(l1 + l2 + 1);
 	if (!tmp)
 	{
 		free(s1);
 		return (NULL);
 	}
-	i = 0;
-	while (i < l2)
-	{
-		tmp[l1 + i] = s2[i];
-		i++;
-	}
-	tmp[l1 + l2] = '\0';
+	ft_strlcpy(tmp, s1, l1 + 1);
+	ft_strlcpy(tmp + l1, s2, l2 + 1);
+	free(s1);
 	return (tmp);
 }
 
